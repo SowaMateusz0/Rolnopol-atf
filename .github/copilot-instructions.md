@@ -43,3 +43,25 @@ When creating or updating Playwright tests, tag them using the tags defined in [
 This repository uses the Playwright Test framework from `@playwright/test`.
 
 Before creating or updating tests, review [playwright.config.ts](../playwright.config.ts) and follow its configured test directory, timeouts, projects, base URL, reporter, and other shared settings.
+
+## AAA structure for tests
+
+When creating or updating Playwright tests, structure them using Arrange / Act / Assert comments:
+
+- Arrange: prepare the test data, page state, and target scenario.
+- Act: navigate to the page and perform the user action under test.
+- Assert: verify the expected UI result, URL, or state.
+
+Use short comments in the test body to keep the flow explicit and easy to review, for example:
+
+```ts
+// Arrange
+const email = `automation.${Date.now()}@example.com`;
+
+// Act
+await page.goto("/register.html");
+await page.getByTestId("email-input").fill(email);
+
+// Assert
+await expect(page).toHaveURL(/\/login\.html$/);
+```
