@@ -12,7 +12,6 @@
     "test": "npx playwright test",
     "test:headed": "npm run test -- --headed",
     "show-report": "npx playwright show-report",
-    "prepare": "husky",
     "trace": "npx playwright show-trace"
   },
   "keywords": [],
