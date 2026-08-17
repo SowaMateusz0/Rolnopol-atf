@@ -19,7 +19,7 @@ test(
     await expect(page).toHaveTitle(/Rolnopol/);
     await expect(
       page.getByRole("heading", { name: /Login to Your User Account/i }),
-    ).toBeVisible();
+    ).toHaveText("Login to Your User Account");
     await expect(page.getByLabel("Email")).toBeVisible();
     await expect(page.getByLabel("Password")).toBeVisible();
     await expect(page.getByRole("button", { name: /Login/i })).toBeVisible();
@@ -35,7 +35,7 @@ test(
     await expect(page).toHaveTitle(/Rolnopol/);
     await expect(
       page.getByRole("heading", { name: /Create Your User Account/i }),
-    ).toBeVisible();
+    ).toHaveText("Create Your User Account");
     await expect(page.getByLabel("Email")).toBeVisible();
     await expect(page.getByLabel("Password", { exact: true })).toBeVisible();
     await expect(
