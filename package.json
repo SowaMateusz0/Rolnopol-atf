@@ -1,0 +1,25 @@
+{
+  "name": "rolnopol-atf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:ui": "npm run test -- --ui",
+    "format": "npx prettier --write .",
+    "format:check": "npx prettier . --check \"!**.ts\"",
+    "lint": "npx eslint . --max-warnings=0",
+    "tsc:check": "npx tsc --noEmit --pretty --strict",
+    "test": "npx playwright test",
+    "test:headed": "npm run test -- --headed",
+    "show-report": "npx playwright show-report",
+    "prepare": "husky",
+    "trace": "npx playwright show-trace"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0"
+  }
+}
