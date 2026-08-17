@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { RegistrationPage } from "../pages/registration.page";
 
 test(
   "Shows Rolnopol title on homepage",
@@ -66,18 +67,14 @@ test(
     // Arrange
     const email = `automation.${Date.now()}@example.com`;
     const displayName = `Automation ${Date.now().toString().slice(-4)}`;
+    const registrationPage = new RegistrationPage(page);
 
     // Act
-    await page.goto("/register.html");
-    await page.getByTestId("email-input").fill(email);
-    await page.getByTestId("display-name-input").fill(displayName);
-    await page.getByTestId("password-input").fill("Password123");
-    await page.getByTestId("register-submit-btn").click();
+    await registrationPage.goto();
+    await registrationPage.register(email, displayName, "Password123");
 
     // Assert
-    await expect(
-      page.getByRole("alert").filter({ hasText: /registration successful/i }),
-    ).toBeVisible();
+    await expect(registrationPage.successAlert).toBeVisible();
     await expect(page).toHaveURL(/\/login\.html$/);
     await expect(
       page.getByRole("heading", { name: /Login to Your User Account/i }),
