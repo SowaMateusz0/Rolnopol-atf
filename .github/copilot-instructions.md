@@ -37,3 +37,9 @@ When creating or updating Playwright tests, tag them using the tags defined in [
 - Add `@smoke` when the test belongs to the smoke suite.
 - Add the appropriate priority tag (`@p0`, `@p1`, `@p2`).
 - If a new tag/category is needed, add it to the Tag Legend table in [TEST_PLAN.md](../TEST_PLAN.md#10-tag-legend) so the reference stays up to date.
+
+# Playwright Test
+
+This repository uses the Playwright Test framework from `@playwright/test`.
+
+Before creating or updating tests, review [playwright.config.ts](../playwright.config.ts) and follow its configured test directory, timeouts, projects, base URL, reporter, and other shared settings.
