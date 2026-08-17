@@ -1,7 +1,11 @@
 import { expect, test } from "@playwright/test";
 
-test("Shows Rolnopol title on homepage", async ({ page }) => {
-  await page.goto("");
+test(
+  "Shows Rolnopol title on homepage",
+  { tag: ["@smoke"] },
+  async ({ page }) => {
+    await page.goto("");
 
-  await expect(page).toHaveTitle(/Rolnopol/);
-});
+    await expect(page).toHaveTitle(/Rolnopol/);
+  },
+);
