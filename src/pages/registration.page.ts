@@ -6,6 +6,7 @@ export class RegistrationPage {
   readonly displayNameInput: Locator;
   readonly passwordInput: Locator;
   readonly submitButton: Locator;
+  readonly successAlert: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -13,15 +14,20 @@ export class RegistrationPage {
     this.displayNameInput = page.getByTestId("display-name-input");
     this.passwordInput = page.getByTestId("password-input");
     this.submitButton = page.getByTestId("register-submit-btn");
+    this.successAlert = page
+      .getByRole("alert")
+      .filter({ hasText: /registration successful/i });
   }
 
   async goto() {
     await this.page.goto("/register.html");
   }
 
-  async register(email: string, displayName: string, password: string) {
+  async register(email: string, password: string, displayName?: string) {
     await this.emailInput.fill(email);
-    await this.displayNameInput.fill(displayName);
+    if (displayName) {
+      await this.displayNameInput.fill(displayName);
+    }
     await this.passwordInput.fill(password);
     await this.submitButton.click();
   }

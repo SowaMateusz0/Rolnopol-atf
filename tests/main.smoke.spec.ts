@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { RegistrationPage } from "../pages/registration.page";
+import { RegistrationPage } from "../src/pages/registration.page";
 
 test(
   "Shows Rolnopol title on homepage",
@@ -42,18 +42,18 @@ test(
   { tag: ["@auth", "@smoke", "@p1"] },
   async ({ page }) => {
     // Arrange
-    // The registration page should expose the account creation form elements.
+    const registrationPage = new RegistrationPage(page);
 
     // Act
-    await page.goto("/register.html");
+    await registrationPage.goto();
 
     // Assert
     await expect(page).toHaveTitle(/Rolnopol/);
     await expect(
       page.getByRole("heading", { name: /Create Your User Account/i }),
     ).toHaveText("Create Your User Account");
-    await expect(page.getByLabel("Email")).toBeVisible();
-    await expect(page.getByLabel("Password", { exact: true })).toBeVisible();
+    await expect(registrationPage.emailInput).toBeVisible();
+    await expect(registrationPage.passwordInput).toBeVisible();
     await expect(
       page.getByRole("button", { name: /Create Account/i }),
     ).toBeVisible();
@@ -74,7 +74,9 @@ test(
     await registrationPage.register(email, displayName, "Password123");
 
     // Assert
-    await expect(registrationPage.successAlert).toBeVisible();
+    await expect(
+      page.getByRole("alert").filter({ hasText: /registration successful/i }),
+    ).toBeVisible();
     await expect(page).toHaveURL(/\/login\.html$/);
     await expect(
       page.getByRole("heading", { name: /Login to Your User Account/i }),
