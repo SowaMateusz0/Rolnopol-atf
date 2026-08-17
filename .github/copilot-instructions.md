@@ -28,3 +28,12 @@ Example: type(scope): short summary
 - docs(readme): clarify local setup steps
 - test(e2e): add smoke coverage for login
 - chore(deps): bump playwright version
+
+# Test tagging
+
+When creating or updating Playwright tests, tag them using the tags defined in [TEST_PLAN.md](../TEST_PLAN.md#10-tag-legend) (e.g. `test("...", { tag: ["@auth", "@smoke", "@p0"] }, ...)`).
+
+- Apply the relevant feature area tag(s) (`@auth`, `@rbac`, `@farm`, `@marketplace`, `@financial`, `@health`, `@api`).
+- Add `@smoke` when the test belongs to the smoke suite.
+- Add the appropriate priority tag (`@p0`, `@p1`, `@p2`).
+- If a new tag/category is needed, add it to the Tag Legend table in [TEST_PLAN.md](../TEST_PLAN.md#10-tag-legend) so the reference stays up to date.
