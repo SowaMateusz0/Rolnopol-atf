@@ -79,3 +79,26 @@ test(
     await expect(loginPage.heading).toBeVisible();
   },
 );
+
+test(
+  "Registration with invalid email format and weak password shows field errors and blocks submission",
+  { tag: ["@auth", "@p1"] },
+  async ({ page }) => {
+    // Arrange
+    const registrationPage = new RegistrationPage(page);
+
+    // Act
+    await registrationPage.goto();
+    await registrationPage.register("not-an-email", "", "ab");
+
+    // Assert
+    await expect(registrationPage.emailError).toHaveText(
+      "Please enter a valid email address",
+    );
+    await expect(registrationPage.passwordError).toHaveText(
+      "Must be at least 3 characters",
+    );
+    await expect(registrationPage.successAlert).not.toBeVisible();
+    await expect(page).toHaveURL(new RegExp(`${PAGE_URLS.registration}$`));
+  },
+);

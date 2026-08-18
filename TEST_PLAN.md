@@ -37,6 +37,9 @@ Each scenario is annotated with tags to be used as Playwright test tags (e.g. `t
 - Register with valid unique email/displayed name/password → success alert shown, redirect to `/login.html` `@auth` `@smoke` `@p1`
 - Register with duplicate email → validation error `@auth` `@p1`
 - Register with invalid input (missing fields, weak password, invalid email format) → error shown `@auth` `@p1`
+  - Email is required and must match a valid email format (input `type="email"`) → inline field error "Please enter a valid email address"
+  - Password is required and must be at least 3 characters (input `minlength="3"`) → inline field error "Must be at least 3 characters"
+  - Invalid submission stays on `/register.html`, no success alert shown, no account created
 - Login with valid credentials → auth token set as cookie (`rolnopolToken`), `rolnopolLoginTime` cookie set `@auth` `@smoke` `@p0`
 - Login with invalid credentials → error, no token issued `@auth` `@p0`
 - Login with deactivated account → error `@auth` `@p1`
