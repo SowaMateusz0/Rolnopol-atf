@@ -1,4 +1,6 @@
 import { expect, test } from "@playwright/test";
+import { HomePage } from "../src/pages/home.page";
+import { LoginPage } from "../src/pages/login.page";
 import { RegistrationPage } from "../src/pages/registration.page";
 
 test(
@@ -6,10 +8,10 @@ test(
   { tag: ["@health", "@smoke", "@p0"] },
   async ({ page }) => {
     // Arrange
-    // The homepage is the target page under test.
+    const homePage = new HomePage(page);
 
     // Act
-    await page.goto("");
+    await homePage.goto();
 
     // Assert
     await expect(page).toHaveTitle(/Rolnopol/);
@@ -21,19 +23,17 @@ test(
   { tag: ["@auth", "@smoke", "@p1"] },
   async ({ page }) => {
     // Arrange
-    // The login page is expected to render the standard Rolnopol auth form.
+    const loginPage = new LoginPage(page);
 
     // Act
-    await page.goto("/login.html");
+    await loginPage.goto();
 
     // Assert
     await expect(page).toHaveTitle(/Rolnopol/);
-    await expect(
-      page.getByRole("heading", { name: /Login to Your User Account/i }),
-    ).toHaveText("Login to Your User Account");
-    await expect(page.getByLabel("Email")).toBeVisible();
-    await expect(page.getByLabel("Password")).toBeVisible();
-    await expect(page.getByRole("button", { name: /Login/i })).toBeVisible();
+    await expect(loginPage.heading).toHaveText("Login to Your User Account");
+    await expect(loginPage.emailInput).toBeVisible();
+    await expect(loginPage.passwordInput).toBeVisible();
+    await expect(loginPage.loginButton).toBeVisible();
   },
 );
 
@@ -49,14 +49,12 @@ test(
 
     // Assert
     await expect(page).toHaveTitle(/Rolnopol/);
-    await expect(
-      page.getByRole("heading", { name: /Create Your User Account/i }),
-    ).toHaveText("Create Your User Account");
+    await expect(registrationPage.heading).toHaveText(
+      "Create Your User Account",
+    );
     await expect(registrationPage.emailInput).toBeVisible();
     await expect(registrationPage.passwordInput).toBeVisible();
-    await expect(
-      page.getByRole("button", { name: /Create Account/i }),
-    ).toBeVisible();
+    await expect(registrationPage.submitButton).toBeVisible();
   },
 );
 
@@ -74,12 +72,9 @@ test(
     await registrationPage.register(email, displayName, "Password123");
 
     // Assert
-    await expect(
-      page.getByRole("alert").filter({ hasText: /registration successful/i }),
-    ).toBeVisible();
+    await expect(registrationPage.successAlert).toBeVisible();
     await expect(page).toHaveURL(/\/login\.html$/);
-    await expect(
-      page.getByRole("heading", { name: /Login to Your User Account/i }),
-    ).toBeVisible();
+    const loginPage = new LoginPage(page);
+    await expect(loginPage.heading).toBeVisible();
   },
 );
