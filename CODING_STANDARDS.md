@@ -12,6 +12,19 @@ Use Page Objects to model a page or screen and to encapsulate user interactions.
 - Keep page actions such as `goto()`, `login()`, `register()`, and form fills in the Page Object.
 - Keep the Page Object free of test logic and browser assertions.
 
+### Share common page behavior through BasePage
+
+- All Page Objects must extend `BasePage`.
+- Keep shared browser behavior, including navigation, in `BasePage`.
+- Do not reimplement `goto()` or store a separate `Page` instance in a concrete Page Object.
+- Concrete Page Objects should contain only page-specific locators and interactions.
+
+### Centralize page URLs
+
+- Define application page routes in `src/pages/page-urls.ts` using `PAGE_URLS`.
+- Reference `PAGE_URLS` from Page Objects and tests instead of repeating URL literals.
+- Each concrete Page Object must expose its route through its `url` property, and `BasePage.goto()` must navigate using that property.
+
 ### Do not put assertions in Page Objects
 
 - Do not call `expect(...)` inside a Page Object.
