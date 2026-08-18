@@ -8,6 +8,7 @@ on:
 jobs:
   hello:
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - name: Print message
         run: echo "Hello form Cl"
