@@ -96,7 +96,7 @@ test(
       "Please enter a valid email address",
     );
     await expect(registrationPage.passwordError).toHaveText(
-      "Must be at least 3 characters",
+      "Password must be at least 3 characters",
     );
     await expect(registrationPage.successAlert).not.toBeVisible();
     await expect(page).toHaveURL(new RegExp(`${PAGE_URLS.registration}$`));
