@@ -5,6 +5,7 @@
     "pkief.material-icon-theme",
     "ms-playwright.playwright",
     "esbenp.prettier-vscode",
-    "GitHub.vscode-pull-request-github"
+    "GitHub.vscode-pull-request-github",
+    "github.vscode-github-actions"
   ]
 }
