@@ -10,6 +10,8 @@ export class RegistrationPage extends BasePage {
   readonly submitButton: Locator;
   readonly heading: Locator;
   readonly successAlert: Locator;
+  readonly emailError: Locator;
+  readonly passwordError: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -23,6 +25,8 @@ export class RegistrationPage extends BasePage {
     this.successAlert = page
       .getByRole("alert")
       .filter({ hasText: /registration successful/i });
+    this.emailError = page.locator("#email ~ .form__error");
+    this.passwordError = page.locator("#password ~ .form__error");
   }
 
   async register(email: string, displayName: string, password: string) {
