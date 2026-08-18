@@ -34,7 +34,7 @@ Each scenario is annotated with tags to be used as Playwright test tags (e.g. `t
 
 ### 5.1 Registration & Login
 
-- Register with valid unique email/displayed name/password → account created, auto-login, redirect to `/profile.html` `@auth` `@p1`
+- Register with valid unique email/displayed name/password → success alert shown, redirect to `/login.html` `@auth` `@smoke` `@p1`
 - Register with duplicate email → validation error `@auth` `@p1`
 - Register with invalid input (missing fields, weak password, invalid email format) → error shown `@auth` `@p1`
 - Login with valid credentials → auth token set as cookie (`rolnopolToken`), `rolnopolLoginTime` cookie set `@auth` `@smoke` `@p0`
@@ -113,7 +113,8 @@ Each scenario is annotated with tags to be used as Playwright test tags (e.g. `t
 
 - **E2E UI tests**: Playwright (`tests/` directory), following existing conventions in [main.smoke.spec.ts](tests/main.smoke.spec.ts).
 - **API tests**: Playwright request fixtures against `/api/v1/` endpoints, cross-checked with Swagger schema.
-- **Smoke suite**: homepage load, login, and one flow per feature area (auth, marketplace, financial).
+- **Current smoke suite**: homepage title, login-page visibility, registration-page visibility, and successful registration redirect to login.
+- **Planned smoke expansion**: valid login, logout, marketplace purchase, and insufficient-funds coverage.
 - **Regression suite**: all scenarios in section 5.
 
 ## 9. Suggested Priorities
