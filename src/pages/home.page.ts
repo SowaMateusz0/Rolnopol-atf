@@ -1,13 +1,6 @@
-import { type Page } from "@playwright/test";
+import { BasePage } from "./base.page";
+import { PAGE_URLS } from "./page-urls";
 
-export class HomePage {
-  readonly page: Page;
-
-  constructor(page: Page) {
-    this.page = page;
-  }
-
-  async goto() {
-    await this.page.goto("");
-  }
+export class HomePage extends BasePage {
+  protected readonly url = PAGE_URLS.home;
 }

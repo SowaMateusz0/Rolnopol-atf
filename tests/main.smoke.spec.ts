@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { HomePage } from "../src/pages/home.page";
 import { LoginPage } from "../src/pages/login.page";
+import { PAGE_URLS } from "../src/pages/page-urls";
 import { RegistrationPage } from "../src/pages/registration.page";
 
 test(
@@ -73,7 +74,7 @@ test(
 
     // Assert
     await expect(registrationPage.successAlert).toBeVisible();
-    await expect(page).toHaveURL(/\/login\.html$/);
+    await expect(page).toHaveURL(new RegExp(`${PAGE_URLS.login}$`));
     const loginPage = new LoginPage(page);
     await expect(loginPage.heading).toBeVisible();
   },
